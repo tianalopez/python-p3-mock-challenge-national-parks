@@ -2,9 +2,21 @@ import re
 from collections import Counter
 
 class NationalPark:
-
+    all = []
     def __init__(self, name):
         self.name = name
+
+        type(self).all.append(self)
+
+    #classmethod
+    @classmethod
+    def most_visited(cls):
+        visit_count = Counter([trip.national_park for trip in Trip.all])
+        if visit_count:
+            return visit_count.most_common(1)[0][0]
+        else:
+            return None
+
 
     #national park property
     @property
