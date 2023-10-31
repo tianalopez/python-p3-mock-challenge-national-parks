@@ -12,7 +12,13 @@ class NationalPark:
         return self._name
     @name.setter
     def name(self, new_name):
-        if isinstance(new_name, str) and len(new_name) >= 3 and not hasattr(self, 'name'):
+        if not isinstance(new_name, str):
+            raise Exception("Name needs to be string")
+        elif len(new_name) < 3:
+            raise Exception("Name must be at least two characters")
+        elif hasattr(self, 'name'):
+            raise Exception("Name can't be reset")
+        else:
             self._name = new_name
 
     def trips(self):
@@ -71,7 +77,13 @@ class Trip:
     @start_date.setter
     def start_date(self, new_date):
         pattern = r"\w+\s+\d+(st|nd|rd|th)"
-        if isinstance(new_date, str) and len(new_date) >= 7 and re.match(pattern, new_date):
+        if not isinstance(new_date, str):
+            raise Exception("Date must be a string")
+        elif len(new_date) < 7:
+            raise Exception("Date length must be more than 7 characters")
+        elif not re.match(pattern, new_date):
+            raise Exception("Date must match 'September 1st' pattern")
+        else:
             self._start_date = new_date
 
     #end date
@@ -81,7 +93,13 @@ class Trip:
     @end_date.setter
     def end_date(self, new_date):
         pattern = r"\w+\s+\d+(st|nd|rd|th)"
-        if isinstance(new_date, str) and len(new_date) >= 7 and re.match(pattern, new_date):
+        if not isinstance(new_date, str):
+            raise Exception("Date must be a string")
+        elif len(new_date) < 7:
+            raise Exception("Date length must be more than 7 characters")
+        elif not re.match(pattern, new_date):
+            raise Exception("Date must match 'September 1st' pattern")
+        else:
             self._end_date = new_date
 
 
@@ -97,7 +115,11 @@ class Visitor:
         return self._name
     @name.setter
     def name(self, new_name):
-        if isinstance(new_name, str) and 1 <= len(new_name) <= 15:
+        if not isinstance(new_name, str):
+            raise Exception("Name must be a string")
+        elif len(new_name) < 1 or len(new_name) > 15 :
+            raise Exception("Name must be between 1 and 15 characters")
+        else:
             self._name = new_name
 
     def trips(self):
